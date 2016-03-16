@@ -1,0 +1,11 @@
+D:\DOCUMENT\PROJECTS\MONGO\mongo-crud\src\main\java\shafin\web\mongocrud\config\WebAppConfiguration.java
+D:\DOCUMENT\PROJECTS\MONGO\mongo-crud\src\main\java\shafin\web\mongocrud\service\NewsService.java
+D:\DOCUMENT\PROJECTS\MONGO\mongo-crud\src\main\java\shafin\web\mongocrud\crawler\DailystarParserImpl.java
+D:\DOCUMENT\PROJECTS\MONGO\mongo-crud\src\main\java\shafin\web\mongocrud\controller\HomeController.java
+D:\DOCUMENT\PROJECTS\MONGO\mongo-crud\src\main\java\shafin\web\mongocrud\crawler\ProthomaloParserImpl.java
+D:\DOCUMENT\PROJECTS\MONGO\mongo-crud\src\main\java\shafin\web\mongocrud\crawler\NewsParser.java
+D:\DOCUMENT\PROJECTS\MONGO\mongo-crud\src\main\java\shafin\web\mongocrud\model\News.java
+D:\DOCUMENT\PROJECTS\MONGO\mongo-crud\src\main\java\shafin\web\mongocrud\config\MongoDBConfiguration.java
+D:\DOCUMENT\PROJECTS\MONGO\mongo-crud\src\main\java\shafin\web\mongocrud\dto\NewsDto.java
+D:\DOCUMENT\PROJECTS\MONGO\mongo-crud\src\main\java\shafin\web\mongocrud\model\NewsPhoto.java
+D:\DOCUMENT\PROJECTS\MONGO\mongo-crud\src\main\java\shafin\web\mongocrud\repository\NewsRepository.java

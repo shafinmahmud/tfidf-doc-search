@@ -1,0 +1,11 @@
+shafin\web\mongocrud\crawler\ProthomaloParserImpl.class
+shafin\web\mongocrud\repository\NewsRepository.class
+shafin\web\mongocrud\config\MongoDBConfiguration.class
+shafin\web\mongocrud\dto\NewsDto.class
+shafin\web\mongocrud\crawler\DailystarParserImpl.class
+shafin\web\mongocrud\model\News.class
+shafin\web\mongocrud\config\WebAppConfiguration.class
+shafin\web\mongocrud\service\NewsService.class
+shafin\web\mongocrud\crawler\NewsParser.class
+shafin\web\mongocrud\controller\HomeController.class
+shafin\web\mongocrud\model\NewsPhoto.class

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<title>NEWS HuB | News Repository</title>
+<link rel="stylesheet"
+	href="../resources/lib/bootstrap/css/bootstrap.min.css"
+	th:href="@{/resources/lib/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+	th:href="@{http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css}" />
+
+<link rel="stylesheet" href="../resources/css/header.css"
+	th:href="@{/resources/css/header.css}" />
+<link rel="stylesheet" href="../resources/css/footer.css"
+	th:href="@{/resources/css/footer.css}" />
+<link rel="stylesheet" href="../resources/css/home.css"
+	th:href="@{/resources/css/home.css}" />
+</head>
+
+<body>
+	<div id="custom-bootstrap-menu"
+		class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Bangladesh</a>
+			</div>
+
+			<div class="navbar-collapse collapse" id="searchbar">
+				<form class="navbar-form">
+					<div class="form-group" style="display: inline;">
+						<div class="input-group" style="display: table;">
+							<span class="input-group-addon" style="width: 6%;"><span
+								class="glyphicon glyphicon-search"></span></span> <input
+								class="form-control" name="search" placeholder="Search Here"
+								autocomplete="off" autofocus="autofocus" type="text">
+						</div>
+					</div>
+				</form>
+
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+
+	<!-- -->
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-12">
+
+				<div>
+					<h3>About 5 document(s) matches for the query 'blabla...</h3>
+				</div>
+
+				<div class="col-md-12">
+					<h4>About 5 document(s) matches for the query 'blabla...</h4>
+				</div>
+				<div id="wrapper">
+					<div id="rows">
+						<div class="pin">
+							<div class="col-md-10 blogShort">
+								<h3>ঔষধি লতাগুল্ম</h3>
+								<em><a
+									href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation"
+									target="_blank">প্রবন্ধটি বাংলাপিডিয়ায় দেখুন</a></em>
+								<article>
+									<p>ঔষধি লতাগুল্ম (Medicinal Herb) রোগ নিরাময়কারী হিসেবে
+										ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত দ্রব্য। ঔষধি লতাগুল্মের এমন
+										বিশেষ কিছু গুণ রয়েছে যা চিকিৎসার গুরুত্বপূর্ণ উপাদান হিসেবে
+										কাজ করে। এর মধ্যে উল্লেখযোগ্য কতিপয় অ্যালকালয়েড (alkaloid),
+										গ্লাইকোসাইডস (glycosides), ট্যানিন (tannin), উদ্বায়ী তৈল,
+										খনিজ এবং ভিটামিন।</p>
+								</article>
+								<a class="btn btn-blog pull-right marginBottom10"
+									href="http://bootsnipp.com/user/snippets/2RoQ">আরও পড়ুন</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="clearfix"></div>
+				<!-- pagination -->
+				<div th:if="${pager.totalItems > 10}">
+					<div th:replace="fragments/pagination :: [id='paginator']"
+						th:remove="tag">Pagination Control</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!--   footer      -->
+	<footer class="footer-distributed">
+		<div class="footer-left">
+			<h3>
+				NEWS <span>HuB</span>
+			</h3>
+			<p class="footer-links">
+				<a href="#">Home</a> · <a href="#">Add</a> · <a href="#">Edit</a> ·
+				<a href="#">About</a> · <a href="#">Faq</a> · <a href="#">Contact</a>
+			</p>
+			<p class="footer-company-name">NEWS Hub © 2015</p>
+		</div>
+		<div class="footer-center">
+			<div>
+				<i class="fa fa-map-marker"></i>
+				<p>
+					<span>IICT, SUST</span> Sylhet
+				</p>
+			</div>
+			<div>
+				<i class="fa fa-phone"></i>
+				<p>+880 1717 364467</p>
+			</div>
+			<div>
+				<i class="fa fa-envelope"></i>
+				<p>
+					<a href="mailto:support@company.com">shafin.mahmud@gmail.com</a>
+				</p>
+			</div>
+		</div>
+
+		<div class="footer-right">
+			<p class="footer-company-about">
+				<span>About me</span> <i>Some days are just bad days, that's
+					all. You have to experience sadness to know happiness, and I remind
+					myself that not every day is going to be a good day, that's just
+					the way it is!</i> <b>Dita Von Teese</b>
+			</p>
+
+			<div class="footer-icons">
+				<a href="#"><i class="fa fa-facebook"></i></a> <a
+					href="https://fb.com/shafin.mahmud"><i class="fa fa-twitter"></i></a>
+				<a href="#twitter.com/twitting.mahmud"><i class="fa fa-linkedin"></i></a>
+				<a href="https://github.com/shafinmahmud"><i
+					class="fa fa-github"></i></a>
+			</div>
+		</div>
+	</footer>
+
+	<script src="../resources/lib/jquery-2.1.4.min.js"
+		th:src="@{/resources/lib/jquery-2.1.4.min.js}" type="text/javascript">
+		
+	</script>
+	<script src="../resources/lib/bootstrap/js/bootstrap.min.js"
+		th:src="@{/resources/lib/bootstrap/js/bootstrap.min.js}"
+		type="text/javascript">
+		
+	</script>
+
+
+	<script>
+		$(document).ready(function() {
+			$("#mytable #checkall").click(function() {
+				if ($("#mytable #checkall").is(':checked')) {
+					$("#mytable input[type=checkbox]").each(function() {
+						$(this).prop("checked", true);
+					});
+
+				} else {
+					$("#mytable input[type=checkbox]").each(function() {
+						$(this).prop("checked", false);
+					});
+				}
+			});
+
+			$("[data-toggle=tooltip]").tooltip();
+		});
+	</script>
+</body>
+
+</html>

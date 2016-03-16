@@ -1,0 +1,13 @@
+﻿db.news.insert({
+ source: "Banglapedia" ,
+ url_bn: "http://bn.banglapedia.org/index.php?title=%E0%A6%97%E0%A6%AE",
+ url_en: "",
+ title_bn: "গম",
+ title_en: "",
+ keywords_bn: ["International","Sports"],
+ keywords_en: ["International","Sports"],
+ author_bn: "Goal.com",
+ author_en: "",
+ article_bn: "লেখা যদি দেখা যায় তাহলে ঠিক আছে",
+ article_en: ""
+})
