@@ -37,13 +37,15 @@
 			</div>
 
 			<div class="navbar-collapse collapse" id="searchbar">
-				<form class="navbar-form">
+				<form class="navbar-form" action="#" th:action="@{/doc/search}">
 					<div class="form-group" style="display: inline;">
 						<div class="input-group" style="display: table;">
-							<span class="input-group-addon" style="width: 6%;"><span
-								class="glyphicon glyphicon-search"></span></span> <input
-								class="form-control" name="search" placeholder="Search Here"
-								autocomplete="off" autofocus="autofocus" type="text"> </input>
+							<span class="input-group-addon" style="width: 6%;">
+								<span class="glyphicon glyphicon-search"></span>
+							</span> 
+							<input class="form-control" name="q" placeholder="Search Here"
+								autocomplete="off" autofocus="autofocus" type="text"> 
+							</input>
 						</div>
 					</div>
 				</form>
@@ -52,6 +54,7 @@
 			<!--/.nav-collapse -->
 		</div>
 	</div>
+
 
 	<!-- -->
 	<div class="container">
@@ -69,11 +72,12 @@
 						<div class="pin">
 							<img th:src="@{${doc.photoURL}}"
 								src="http://bn.banglapedia.org/images/7/72/MedicinalHerbBasak.jpg" />
-							<h4 th:text="${doc.title}" th:href="@{${doc.url}}"><a>ঔষধি
-									লতাগুল্ম</a></h4>
-							<p th:text="${doc.article}">ঔষধি লতাগুল্ম (Medicinal
-								Herb) রোগ নিরাময়কারী হিসেবে ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত
-								দ্রব্য। ঔষধি লতাগুল্মের এমন বিশেষ কিছু গুণ রয়েছে যা চিকিৎসার
+							<h4 th:text="${doc.title}" th:href="@{${doc.url}}">
+								<a>ঔষধি লতাগুল্ম</a>
+							</h4>
+							<p th:text="${doc.article}">ঔষধি লতাগুল্ম (Medicinal Herb)
+								রোগ নিরাময়কারী হিসেবে ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত দ্রব্য।
+								ঔষধি লতাগুল্মের এমন বিশেষ কিছু গুণ রয়েছে যা চিকিৎসার
 								গুরুত্বপূর্ণ উপাদান হিসেবে কাজ করে। এর মধ্যে উল্লেখযোগ্য কতিপয়
 								অ্যালকালয়েড (alkaloid)...</p>
 						</div>

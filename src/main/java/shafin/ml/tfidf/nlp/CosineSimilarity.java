@@ -1,57 +1,50 @@
 package shafin.ml.tfidf.nlp;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import shafin.ml.tfidf.util.MapUtil;
 
 public class CosineSimilarity {
 
-	/**
-	 * Method to calculate cosine similarity between two documents.
-	 * 
-	 * @param docVector1 : document vector 1 (a)
-	 * @param docVector2 : document vector 2 (b)
-	 * @return
-	 */
+	public static HashMap<String, Double> cosineSimilarities = new HashMap<>();
+	public static HashMap<String, Double> docLengthVector;
+	public static HashMap<String, Double> queryTFIDFVector;
+	public static Double queryLength;
 
-	public static Map<String,Double> getCosineSimilarities(DataTable tfidfDataTable, QueryEvaluator queryData){
-			
-		HashMap<String, Double> cosineSimilarities = new HashMap<>();
-		
+	public static Map<String, Double> getCosineSimilarities(DataTable tfidfDataTable, QueryEvaluator queryData) {
+
 		Map<String, HashMap<String, Double>> docTermVectors = tfidfDataTable.getDocTermVector();
-		HashMap<String, Double> queryTFIDFVector = queryData.getQueryTFIDFVector();
-		
-		HashMap<String, Double> docLengthVector = tfidfDataTable.getDocLengthVector();
-		Double queryLength = queryData.getQueryLength();
-		
-		for(String docID : docTermVectors.keySet()){
-			
-			double cosineSimilarity = 0.0;
-			double dotProduct = 0.0;
-			double docLength = docLengthVector.get(docID);
-			
-			HashMap<String, Double> docTFIDFVector = docTermVectors.get(docID);
-			
-			for(String term : queryTFIDFVector.keySet()){
-				if(docTFIDFVector.containsKey(term)){
-					dotProduct += docTFIDFVector.get(term) * queryTFIDFVector.get(term);
-				}
-			}
-			
-			if (docLength != 0.0 |  docLength != 0.0) {
-				cosineSimilarity = dotProduct / (queryLength *  docLength);
-			} 
-			
-			if(cosineSimilarity > 0){
-				cosineSimilarities.put(docID, cosineSimilarity);
+		queryTFIDFVector = queryData.getQueryTFIDFVector();
+
+		docLengthVector = tfidfDataTable.getDocLengthVector();
+		queryLength = queryData.getQueryLength();
+
+		ExecutorService threadExecutor = Executors.newFixedThreadPool(5);
+
+		for (Map.Entry<String, HashMap<String, Double>> docEntry : docTermVectors.entrySet()) {
+
+			CosineProcessor cosineProcessor = new CosineProcessor(docEntry);
+			threadExecutor.execute(cosineProcessor);
+
+		}
+
+		threadExecutor.shutdown();
+		boolean flag = true;
+
+		while (!threadExecutor.isTerminated() || flag) {
+			if (threadExecutor.isTerminated()) {
+				flag = false;
+				return MapUtil.sortByValueDecending(cosineSimilarities);
 			}
 		}
-		
-		return MapUtil.sortByValueDecending(cosineSimilarities);
+		return null;
 	}
-	
+
 	public static double calculateLength(HashMap<String, Double> tfidfVector) {
 
 		double magnitude = 0.0;
@@ -61,8 +54,8 @@ public class CosineSimilarity {
 			double tfidf = tfidfVector.get(terms.get(j));
 			magnitude += Math.pow(tfidf, 2); // (a^2)
 		}
-		
+
 		return Math.sqrt(magnitude);// sqrt(a^2)
 	}
-	
+
 }

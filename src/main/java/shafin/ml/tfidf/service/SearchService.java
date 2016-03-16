@@ -3,6 +3,7 @@ package shafin.ml.tfidf.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,42 +21,42 @@ public class SearchService {
 	private final String CORPUS_LOCATION = "D:\\DOCUMENT\\BP\\";
 
 	public List<ArticleDto> searchCollection(String query) {
-
-		List<BanglapediaDoc> resultDoc = new ArrayList<>();
-		System.out.println(query);
+		
+		List<ArticleDto> docDtos = new ArrayList<>();
 
 		try {
 			QueryEvaluator queryEvaluator;
 			queryEvaluator = new QueryEvaluator(query);
-			System.out.println(queryEvaluator.getQueryTFVector());
-			System.out.println(queryEvaluator.getQueryTFIDFVector());
+			// System.out.println(queryEvaluator.getQueryTFVector());
+			// System.out.println(queryEvaluator.getQueryTFIDFVector());
 
-			Map<String, Double> cosineVector;
-			cosineVector = CosineSimilarity.getCosineSimilarities(DataFileProcessor.getTfidfHashTable(),
-					queryEvaluator);
+			Map<String, Double> cosineVector = CosineSimilarity
+					.getCosineSimilarities(DataFileProcessor.getTfidfHashTable(), queryEvaluator);
 
-			for (String fileName : cosineVector.keySet()) {
-				BanglapediaDoc banglapediaDoc = pullDoc(fileName);
-
+			for (String docID : cosineVector.keySet()) {
+				
+				String fileName = docID.replace(".bin", ".json");
+				BanglapediaDoc banglapediaDoc = pullDoc(fileName);			
+				
 				if (banglapediaDoc != null) {
-					resultDoc.add(banglapediaDoc);
-					System.out.println(fileName + " : " + cosineVector.get(fileName));
+					Double cosineValue = cosineVector.get(docID);
+					docDtos.add(convertToDto(fileName, cosineValue, banglapediaDoc));
 				} else {
-					System.out.println("But UNFORTUNATELY " + fileName + ".json is found");
+					System.out.println("But UNFORTUNATELY " + docID + " is not found");
 				}
-
+							
 			}
 
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
-		return convertToDtoList(resultDoc);
+		return docDtos;
 	}
 
 	private BanglapediaDoc pullDoc(String docName) {
 
 		try {
-			File file = new File(CORPUS_LOCATION + docName + ".json");
+			File file = new File(CORPUS_LOCATION + docName);
 			JsonProcessor jsonProcessor = new JsonProcessor(file);
 			return (BanglapediaDoc) jsonProcessor.convertToModel(BanglapediaDoc.class);
 
@@ -64,26 +65,39 @@ public class SearchService {
 		}
 		return null;
 	}
-	
-	private List<ArticleDto> convertToDtoList(List<BanglapediaDoc> banglapediaDocs){
-		return null;
-	}
-	
-	private ArticleDto convertToDto(String docName, BanglapediaDoc doc) {
-		
+
+
+
+	private ArticleDto convertToDto(String docName, Double cosineValue, BanglapediaDoc doc) {
+
 		ArticleDto dto = new ArticleDto();
 		dto.setFileName(docName);
+		dto.setCosineValue(cosineValue);
 		dto.setUrl(doc.getUrl());
 		dto.setTitle(doc.getTitle());
 		dto.setPhotoURL(doc.getPhotoURL());
-		
-		String article = doc.getArticle();	
-		if(article.length() > 100){
-			article = article.substring(0, 100)+"...";
+
+		String article = doc.getArticle();
+		if (article.length() > 500) {
+			article = article.substring(0, 500) + "...";
 		}
 		dto.setArticle(article);
 
 		return dto;
+	}
+
+	public static void main(String[] args) {
+		SearchService service = new SearchService();
+		long init = new Date().getTime();
+		
+		List<ArticleDto> docs = service.searchCollection("বাংলাদেশের কৃষি");
+		//for (ArticleDto dto : docs) {
+			//System.out.println(dto.getCosineValue() + " : " + dto.getFileName());
+		//}
+		
+		long end = new Date().getTime();
+		long diff = end-init;
+		System.out.println("time taken: "+ diff);
 	}
 
 }

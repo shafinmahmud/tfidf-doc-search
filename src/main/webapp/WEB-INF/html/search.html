@@ -34,13 +34,13 @@
 			</div>
 
 			<div class="navbar-collapse collapse" id="searchbar">
-				<form class="navbar-form">
+				<form class="navbar-form" action="#" th:action="@{/doc/search}">
 					<div class="form-group" style="display: inline;">
 						<div class="input-group" style="display: table;">
-							<span class="input-group-addon" style="width: 6%;"><span
-								class="glyphicon glyphicon-search"></span></span> <input
-								class="form-control" name="search" placeholder="Search Here"
-								autocomplete="off" autofocus="autofocus" type="text">
+							<span class="input-group-addon" style="width: 6%;"> <span
+								class="glyphicon glyphicon-search"></span>
+							</span> <input class="form-control" name="q" placeholder="Search Here"
+								autocomplete="off" autofocus="autofocus" type="text"> </input>
 						</div>
 					</div>
 				</form>
@@ -60,29 +60,35 @@
 					<h3>About 5 document(s) matches for the query 'blabla...</h3>
 				</div>
 
-				<div class="col-md-12">
-					<h4>About 5 document(s) matches for the query 'blabla...</h4>
+				<div>
+					<h4 th:inline="text">About [[${pager.totalItems}]] document(s) matches for the query '[[${q}]]'</h4>
 				</div>
 				<div id="wrapper">
 					<div id="rows">
-						<div class="pin">
-							<div class="col-md-10 blogShort">
-								<h3>ঔষধি লতাগুল্ম</h3>
-								<em><a
-									href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation"
-									target="_blank">প্রবন্ধটি বাংলাপিডিয়ায় দেখুন</a></em>
-								<article>
-									<p>ঔষধি লতাগুল্ম (Medicinal Herb) রোগ নিরাময়কারী হিসেবে
-										ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত দ্রব্য। ঔষধি লতাগুল্মের এমন
-										বিশেষ কিছু গুণ রয়েছে যা চিকিৎসার গুরুত্বপূর্ণ উপাদান হিসেবে
-										কাজ করে। এর মধ্যে উল্লেখযোগ্য কতিপয় অ্যালকালয়েড (alkaloid),
-										গ্লাইকোসাইডস (glycosides), ট্যানিন (tannin), উদ্বায়ী তৈল,
-										খনিজ এবং ভিটামিন।</p>
-								</article>
-								<a class="btn btn-blog pull-right marginBottom10"
-									href="http://bootsnipp.com/user/snippets/2RoQ">আরও পড়ুন</a>
+
+						<div th:each="doc, rowStat: *{docs}">
+							<div class="pin">
+								<div class="col-md-10 blogShort">
+									<h3 th:text="${doc.title}">ঔষধি লতাগুল্ম</h3>
+									<em><a
+										href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation"
+										target="_blank">প্রবন্ধটি বাংলাপিডিয়ায় দেখুন</a></em>
+									<article>
+										<p  th:text="${doc.article}">ঔষধি লতাগুল্ম (Medicinal Herb) রোগ নিরাময়কারী হিসেবে
+											ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত দ্রব্য। ঔষধি লতাগুল্মের এমন
+											বিশেষ কিছু গুণ রয়েছে যা চিকিৎসার গুরুত্বপূর্ণ উপাদান হিসেবে
+											কাজ করে। এর মধ্যে উল্লেখযোগ্য কতিপয় অ্যালকালয়েড (alkaloid),
+											গ্লাইকোসাইডস (glycosides), ট্যানিন (tannin), উদ্বায়ী তৈল,
+											খনিজ এবং ভিটামিন।</p>
+									</article>
+									<a class="btn btn-blog pull-right marginBottom10"
+										href="http://bootsnipp.com/user/snippets/2RoQ">আরও পড়ুন</a>
+								</div>
 							</div>
 						</div>
+
+
+
 					</div>
 				</div>
 

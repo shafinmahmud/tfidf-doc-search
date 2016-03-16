@@ -46,7 +46,8 @@ public class FileHandler {
 			return lines;
 
 		} catch (FileNotFoundException e) {
-			System.out.println("File cannot be loaded! " + e.toString());
+			System.out.println(filePath);
+			e.printStackTrace();
 		} catch (IOException e) {
 		} finally {
 			if (br != null) {

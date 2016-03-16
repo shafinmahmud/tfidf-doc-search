@@ -25,20 +25,28 @@ public class SearchController {
 	
 	private static final int PRODUCT_LIST_PAGE_SIZE = 10;
 
-	@RequestMapping(value = "/article/search", params = { "q" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/doc/search", params = { "q" }, method = RequestMethod.GET)
 	public String home(@RequestParam("q") String q, Model model) {
-		return "redirect:/article/search/" + q + "/page/1";
+		System.out.println("routed: "+q);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return "redirect:/doc/search/" + q + "/page/1";
 	}
 
+	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/article/search/{q}/page/{pageNumber}", method = RequestMethod.GET)
-	public String pagedNewsList(HttpServletRequest request, @PathVariable String q, @PathVariable Integer pageNumber,
+	@RequestMapping(value = "/doc/search/{q}/page/{pageNumber}", method = RequestMethod.GET)
+	public String pagedDocList(HttpServletRequest request, @PathVariable String q, @PathVariable Integer pageNumber,
 			Model model) {
 
+		System.out.println("received: "+q);
 		List<ArticleDto> all = searchService.searchCollection(q);
-
+		
 		PagedListHolder<ArticleDto> pagedListHolder = (PagedListHolder<ArticleDto>) request.getSession()
-				.getAttribute("newsSearchList");
+				.getAttribute("docs");
 
 		if (pagedListHolder == null) {
 			pagedListHolder = new PagedListHolder<ArticleDto>(all);
@@ -57,12 +65,12 @@ public class SearchController {
 			
 		}
 
-		request.getSession().setAttribute("newsSearchList", pagedListHolder);
+		request.getSession().setAttribute("docs", pagedListHolder);
 		request.getSession().setAttribute("q",q);
 
 		model.addAttribute("q", q);
-		model.addAttribute("pager", currentPage(pagedListHolder, "/news/search/" + q + "/page/"));
-		model.addAttribute("newsSearchList", pagedListHolder.getPageList());
+		model.addAttribute("pager", currentPage(pagedListHolder, "/doc/search/" + q + "/page/"));
+		model.addAttribute("docs", pagedListHolder.getPageList());
 
 		return "search";
 	}
