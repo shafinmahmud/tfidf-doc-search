@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import shafin.ml.tfidf.dto.ArticleDto;
 import shafin.ml.tfidf.service.SearchService;
@@ -26,10 +27,10 @@ public class SearchController {
 	private static final int PRODUCT_LIST_PAGE_SIZE = 10;
 
 	@RequestMapping(value = "/doc/search", params = { "q" }, method = RequestMethod.GET)
-	public String home(@RequestParam("q") String q, Model model) {
-		System.out.println("routed: "+q);
-		
-		return "redirect:/doc/search/" + q + "/page/1";
+	public String home(@RequestParam("q") String q, RedirectAttributes redirectAttributes) {
+
+		redirectAttributes.addAttribute("q", q);
+		return "redirect:/doc/search/{q}/page/1";
 	}
 
 	

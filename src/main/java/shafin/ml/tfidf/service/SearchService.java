@@ -22,7 +22,6 @@ public class SearchService {
 
 	public List<ArticleDto> searchCollection(String query) {
 		
-		System.out.println("search : "+query);
 		List<ArticleDto> docDtos = new ArrayList<>();
 
 		try {
