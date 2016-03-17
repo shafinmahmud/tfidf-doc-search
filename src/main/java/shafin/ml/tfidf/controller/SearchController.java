@@ -28,11 +28,7 @@ public class SearchController {
 	@RequestMapping(value = "/doc/search", params = { "q" }, method = RequestMethod.GET)
 	public String home(@RequestParam("q") String q, Model model) {
 		System.out.println("routed: "+q);
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		
 		return "redirect:/doc/search/" + q + "/page/1";
 	}
 
@@ -43,23 +39,30 @@ public class SearchController {
 			Model model) {
 
 		System.out.println("received: "+q);
-		List<ArticleDto> all = searchService.searchCollection(q);
+		
 		
 		PagedListHolder<ArticleDto> pagedListHolder = (PagedListHolder<ArticleDto>) request.getSession()
 				.getAttribute("docs");
 
 		if (pagedListHolder == null) {
+
+			List<ArticleDto> all = searchService.searchCollection(q);
 			pagedListHolder = new PagedListHolder<ArticleDto>(all);
 			pagedListHolder.setPageSize(PRODUCT_LIST_PAGE_SIZE);
 
 		} else {
+
 			if(request.getSession().getAttribute("q").equals(q)){
+
 				final int goToPage = pageNumber - 1;
 				if (goToPage <= pagedListHolder.getPageCount() && goToPage >= 0) {
 					pagedListHolder.setPage(goToPage);
 				}
 			}else{
-				pagedListHolder = new PagedListHolder<ArticleDto>(all);
+				List<ArticleDto> all = searchService.searchCollection(q);
+				
+				pagedListHolder.setSource(all);
+				pagedListHolder.setPage(0);
 				pagedListHolder.setPageSize(PRODUCT_LIST_PAGE_SIZE);
 			}
 			

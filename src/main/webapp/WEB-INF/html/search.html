@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8"></meta>
 <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-<title>NEWS HuB | News Repository</title>
+<title>Banglapedia | Search</title>
 <link rel="stylesheet"
 	href="../resources/lib/bootstrap/css/bootstrap.min.css"
 	th:href="@{/resources/lib/bootstrap/css/bootstrap.min.css}" />
@@ -30,7 +30,7 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Bangladesh</a>
+				<a class="navbar-brand" href="/" th:href="@{/}">Bangladesh</a>
 			</div>
 
 			<div class="navbar-collapse collapse" id="searchbar">
@@ -61,30 +61,44 @@
 				</div>
 
 				<div>
-					<h4 th:inline="text">About [[${pager.totalItems}]] document(s) matches for the query '[[${q}]]'</h4>
+					<h4 th:inline="text">About [[${pager.totalItems}]] document(s)
+						matches for the query '[[${q}]]'</h4>
 				</div>
 				<div id="wrapper">
 					<div id="rows">
 
 						<div th:each="doc, rowStat: *{docs}">
-							<div class="pin">
-								<div class="col-md-10 blogShort">
-									<h3 th:text="${doc.title}">ঔষধি লতাগুল্ম</h3>
-									<em><a
-										href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation"
-										target="_blank">প্রবন্ধটি বাংলাপিডিয়ায় দেখুন</a></em>
+
+							<div class="pinr">
+								<a class="pull-left" href="#"> <img
+									th:src="@{${doc.photoURL}}"
+									src="http://bn.banglapedia.org/images/7/72/MedicinalHerbBasak.jpg" />
+								</a>
+								<div class="media-body">
+									<h3 class="media-heading" th:text="${doc.title}">
+										ঔষধি লতাগুল্ম <span class="badge" th:text="${doc.cosineValue}">0.52521</span>
+									</h3>
 									<article>
-										<p  th:text="${doc.article}">ঔষধি লতাগুল্ম (Medicinal Herb) রোগ নিরাময়কারী হিসেবে
-											ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত দ্রব্য। ঔষধি লতাগুল্মের এমন
-											বিশেষ কিছু গুণ রয়েছে যা চিকিৎসার গুরুত্বপূর্ণ উপাদান হিসেবে
-											কাজ করে। এর মধ্যে উল্লেখযোগ্য কতিপয় অ্যালকালয়েড (alkaloid),
-											গ্লাইকোসাইডস (glycosides), ট্যানিন (tannin), উদ্বায়ী তৈল,
-											খনিজ এবং ভিটামিন।</p>
+										<p th:text="${doc.article}">ঔষধি লতাগুল্ম (Medicinal Herb)
+											রোগ নিরাময়কারী হিসেবে ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত
+											দ্রব্য। রোগ নিরাময়কারী হিসেবে ব্যবহার্য উদ্ভিদ অথবা
+											উদ্ভিদজাত দ্রব্য। রোগ নিরাময়কারী হিসেবে ব্যবহার্য উদ্ভিদ
+											অথবা উদ্ভিদজাত দ্রব্য। রোগ নিরাময়কারী হিসেবে ব্যবহার্য
+											উদ্ভিদ অথবা উদ্ভিদজাত দ্রব্য। রোগ নিরাময়কারী হিসেবে
+											ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত দ্রব্য। রোগ নিরাময়কারী
+											হিসেবে ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত দ্রব্য। রোগ
+											নিরাময়কারী হিসেবে ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত দ্রব্য।
+											রোগ নিরাময়কারী হিসেবে ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত
+											দ্রব্য।</p>
 									</article>
-									<a class="btn btn-blog pull-right marginBottom10"
+									<em><a th:thref="@{${doc.url}}"
+										href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation"
+										target="_blank">প্রবন্ধটি বাংলাপিডিয়ায় দেখুন</a></em> <a
+										th:thref="@{/}" class="btn btn-blog pull-right marginBottom10"
 										href="http://bootsnipp.com/user/snippets/2RoQ">আরও পড়ুন</a>
 								</div>
 							</div>
+
 						</div>
 
 
@@ -106,14 +120,14 @@
 	<!--   footer      -->
 	<footer class="footer-distributed">
 		<div class="footer-left">
-			<h3>
+			<!--  <h3>
 				NEWS <span>HuB</span>
-			</h3>
+			</h3>-->
 			<p class="footer-links">
-				<a href="#">Home</a> · <a href="#">Add</a> · <a href="#">Edit</a> ·
-				<a href="#">About</a> · <a href="#">Faq</a> · <a href="#">Contact</a>
+				<a href="#">Home</a> · <a href="#">About</a> · <a href="#">Faq</a> ·
+				<a href="#">Contact</a>
 			</p>
-			<p class="footer-company-name">NEWS Hub © 2015</p>
+			<p class="footer-company-name">Banglapedia © 2015</p>
 		</div>
 		<div class="footer-center">
 			<div>
@@ -151,7 +165,6 @@
 			</div>
 		</div>
 	</footer>
-
 	<script src="../resources/lib/jquery-2.1.4.min.js"
 		th:src="@{/resources/lib/jquery-2.1.4.min.js}" type="text/javascript">
 		

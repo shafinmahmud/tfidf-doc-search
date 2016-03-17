@@ -16,7 +16,7 @@ import shafin.ml.tfidf.util.ListUtil;
 @Service("homeService")
 public class HomeService {
 
-	private final String CORPUS_LOCATION = "D:\\DOCUMENT\\BP\\";
+	private final String CORPUS_LOCATION = "D:\\home\\corpus\\";
 
 	public List<ArticleDto> getRandomArticle(int num) {
 		List<ArticleDto> randomArticles = new ArrayList<>();

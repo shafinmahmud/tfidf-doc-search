@@ -11,13 +11,18 @@ import shafin.ml.tfidf.util.MapUtil;
 
 public class CosineSimilarity {
 
-	public static HashMap<String, Double> cosineSimilarities = new HashMap<>();
+	public static HashMap<String, Double> cosineSimilarities;
 	public static HashMap<String, Double> docLengthVector;
 	public static HashMap<String, Double> queryTFIDFVector;
 	public static Double queryLength;
 
 	public static Map<String, Double> getCosineSimilarities(DataTable tfidfDataTable, QueryEvaluator queryData) {
 
+		/* initializing the static fields */
+		cosineSimilarities = new HashMap<>();
+		docLengthVector = new HashMap<>();
+		queryTFIDFVector = new HashMap<>();
+		
 		Map<String, HashMap<String, Double>> docTermVectors = tfidfDataTable.getDocTermVector();
 		queryTFIDFVector = queryData.getQueryTFIDFVector();
 

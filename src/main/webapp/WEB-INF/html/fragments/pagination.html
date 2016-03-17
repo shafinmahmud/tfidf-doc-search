@@ -4,7 +4,7 @@
 	<ul id="paginator" class="pagination pull-right">
 		<li th:class="${pager.currentIndex == 1}? 'disabled' : ''"><span
 			th:if='${pager.currentIndex == 1}'>First</span> <a
-			th:if='${pager.currentIndex != 1}' th:href="@{${pager.baseUrl}+'/page/1'}">First</a>
+			th:if='${pager.currentIndex != 1}' th:href="@{${pager.baseUrl}+'1'}">First</a>
 		</li>
 		<li th:class="${pager.currentIndex != 1}? '' : 'disabled'"><span
 			th:if='${pager.currentIndex == 1}'>«</span> <a

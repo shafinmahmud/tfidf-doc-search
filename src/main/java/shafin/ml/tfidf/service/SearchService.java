@@ -18,18 +18,17 @@ import shafin.ml.tfidf.util.JsonProcessor;
 @Service("searchService")
 public class SearchService {
 
-	private final String CORPUS_LOCATION = "D:\\DOCUMENT\\BP\\";
+	private final String CORPUS_LOCATION = "D:\\home\\corpus\\";
 
 	public List<ArticleDto> searchCollection(String query) {
 		
+		System.out.println("search : "+query);
 		List<ArticleDto> docDtos = new ArrayList<>();
 
 		try {
 			QueryEvaluator queryEvaluator;
 			queryEvaluator = new QueryEvaluator(query);
-			// System.out.println(queryEvaluator.getQueryTFVector());
-			// System.out.println(queryEvaluator.getQueryTFIDFVector());
-
+	
 			Map<String, Double> cosineVector = CosineSimilarity
 					.getCosineSimilarities(DataFileProcessor.getTfidfHashTable(), queryEvaluator);
 
@@ -87,10 +86,10 @@ public class SearchService {
 	}
 
 	public static void main(String[] args) {
-		SearchService service = new SearchService();
+		//SearchService service = new SearchService();
 		long init = new Date().getTime();
 		
-		List<ArticleDto> docs = service.searchCollection("বাংলাদেশের কৃষি");
+		//List<ArticleDto> docs = service.searchCollection("বাংলাদেশের কৃষি");
 		//for (ArticleDto dto : docs) {
 			//System.out.println(dto.getCosineValue() + " : " + dto.getFileName());
 		//}
