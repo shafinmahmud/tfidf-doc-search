@@ -59,31 +59,12 @@
 			<version>${servlet.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>${jstl.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>javax.servlet.jsp-api</artifactId>
-			<version>${jsp.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring4</artifactId>
 			<version>2.1.4.RELEASE</version>
 		</dependency>
 
-
-
-
 		<!-- Mongo DB -->
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-mongodb</artifactId>
-			<version>1.8.2.RELEASE</version>
-		</dependency>
 
 
 		<!-- Crawler dependency -->

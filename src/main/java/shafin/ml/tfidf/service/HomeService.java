@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import shafin.ml.tfidf.dto.ArticleDto;
+import shafin.ml.tfidf.model.ArticleDto;
 import shafin.ml.tfidf.model.BanglapediaDoc;
 import shafin.ml.tfidf.util.FileHandler;
 import shafin.ml.tfidf.util.JsonProcessor;
@@ -56,7 +56,7 @@ public class HomeService {
 	}
 	
 
-	private BanglapediaDoc pullDoc(String docName) {
+	public BanglapediaDoc pullDoc(String docName) {
 
 		try {
 			File file = new File(CORPUS_LOCATION + docName);

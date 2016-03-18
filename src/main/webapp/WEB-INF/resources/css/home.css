@@ -1,5 +1,5 @@
 body {
-	background: url(http://subtlepatterns.com/patterns/scribble_light.png) ;
+	background: url(http://subtlepatterns.com/patterns/scribble_light.png);
 }
 
 #wrapper {
@@ -46,7 +46,6 @@ body {
 	padding-bottom: 5px;
 	background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
 	opacity: 1;
-	
 	-webkit-transition: all .2s ease;
 	-moz-transition: all .2s ease;
 	-o-transition: all .2s ease;
@@ -79,7 +78,6 @@ body {
 	padding-bottom: 5px;
 	background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
 	opacity: 1;
-	
 	-webkit-transition: all .2s ease;
 	-moz-transition: all .2s ease;
 	-o-transition: all .2s ease;
@@ -99,7 +97,7 @@ body {
 	margin: 0;
 }
 
-@media (min-width: 960px) {
+@media ( min-width : 960px) {
 	#columns {
 		-webkit-column-count: 4;
 		-moz-column-count: 4;
@@ -107,10 +105,34 @@ body {
 	}
 }
 
-@media (min-width: 1100px) {
+@media ( min-width : 1100px) {
 	#columns {
 		-webkit-column-count: 5;
 		-moz-column-count: 5;
 		column-count: 5;
 	}
+}
+
+/* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+#circle-shape-example {
+	font-family: Open Sans, sans-serif;
+	margin: 2rem;
+}
+
+#circle-shape-example p {
+	font: 14px/18px Arial, sans-serif;
+	line-height: 1.8;
+}
+
+#circle-shape-example .curve {
+	width: 30%;
+	height: auto;
+	min-width: 100px;
+	float: left;
+	margin-right: 2rem;
+	border-radius: 2%;
+	-webkit-shape-outside: square();
+	shape-outside: square();
 }

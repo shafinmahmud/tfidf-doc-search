@@ -4,51 +4,38 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document(collection = "banglapediaDoc")
 public class BanglapediaDoc implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Field
 	@JsonProperty("docID")
 	private int docID;
 
-	@Field
 	@JsonProperty("source")
 	private String source;
 
-	@Field
 	@JsonProperty("lang")
 	private String lang;
 
-	@Field
 	@JsonProperty("url")
 	private String url;
 
-	@Field
 	@JsonProperty("otherLangURL")
 	private String otherLangURL;
 
-	@Field
 	@JsonProperty("title")
 	private String title;
 
-	@Field
 	@JsonProperty("keywords")
 	private List<String> keywords;
 
-	@Field
 	@JsonProperty("author")
 	private String author;
 
-	@Field
 	@JsonProperty("photoURL")
 	private String photoURL;
 	
-	@Field
 	@JsonProperty("article")
 	private String article;
 

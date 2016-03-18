@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
-import shafin.ml.tfidf.dto.ArticleDto;
+
+import shafin.ml.tfidf.model.ArticleDto;
 import shafin.ml.tfidf.model.BanglapediaDoc;
 import shafin.ml.tfidf.nlp.CosineSimilarity;
 import shafin.ml.tfidf.nlp.DataFileProcessor;
 import shafin.ml.tfidf.nlp.QueryEvaluator;
 import shafin.ml.tfidf.util.JsonProcessor;
+import shafin.ml.tfidf.util.NumFormatter;
 
 @Service("searchService")
 public class SearchService {
@@ -21,28 +23,28 @@ public class SearchService {
 	private final String CORPUS_LOCATION = "D:\\home\\corpus\\";
 
 	public List<ArticleDto> searchCollection(String query) {
-		
+
 		List<ArticleDto> docDtos = new ArrayList<>();
 
 		try {
 			QueryEvaluator queryEvaluator;
 			queryEvaluator = new QueryEvaluator(query);
-	
+
 			Map<String, Double> cosineVector = CosineSimilarity
 					.getCosineSimilarities(DataFileProcessor.getTfidfHashTable(), queryEvaluator);
 
 			for (String docID : cosineVector.keySet()) {
-				
+
 				String fileName = docID.replace(".bin", ".json");
-				BanglapediaDoc banglapediaDoc = pullDoc(fileName);			
-				
+				BanglapediaDoc banglapediaDoc = pullDoc(fileName);
+
 				if (banglapediaDoc != null) {
 					Double cosineValue = cosineVector.get(docID);
 					docDtos.add(convertToDto(fileName, cosineValue, banglapediaDoc));
 				} else {
 					System.out.println("But UNFORTUNATELY " + docID + " is not found");
 				}
-							
+
 			}
 
 		} catch (ClassNotFoundException | IOException e) {
@@ -64,13 +66,11 @@ public class SearchService {
 		return null;
 	}
 
-
-
 	private ArticleDto convertToDto(String docName, Double cosineValue, BanglapediaDoc doc) {
 
 		ArticleDto dto = new ArticleDto();
 		dto.setFileName(docName);
-		dto.setCosineValue(cosineValue);
+		dto.setCosineValue(NumFormatter.formatDecimal(cosineValue));
 		dto.setUrl(doc.getUrl());
 		dto.setTitle(doc.getTitle());
 		dto.setPhotoURL(doc.getPhotoURL());
@@ -85,17 +85,17 @@ public class SearchService {
 	}
 
 	public static void main(String[] args) {
-		//SearchService service = new SearchService();
+		// SearchService service = new SearchService();
 		long init = new Date().getTime();
-		
-		//List<ArticleDto> docs = service.searchCollection("বাংলাদেশের কৃষি");
-		//for (ArticleDto dto : docs) {
-			//System.out.println(dto.getCosineValue() + " : " + dto.getFileName());
-		//}
-		
+
+		// List<ArticleDto> docs = service.searchCollection("বাংলাদেশের কৃষি");
+		// for (ArticleDto dto : docs) {
+		// System.out.println(dto.getCosineValue() + " : " + dto.getFileName());
+		// }
+
 		long end = new Date().getTime();
-		long diff = end-init;
-		System.out.println("time taken: "+ diff);
+		long diff = end - init;
+		System.out.println("time taken: " + diff);
 	}
 
 }

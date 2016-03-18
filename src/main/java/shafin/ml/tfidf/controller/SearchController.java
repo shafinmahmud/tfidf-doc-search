@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import shafin.ml.tfidf.dto.ArticleDto;
+import shafin.ml.tfidf.model.ArticleDto;
 import shafin.ml.tfidf.service.SearchService;
 
 

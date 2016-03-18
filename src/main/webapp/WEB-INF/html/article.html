@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<title>Banglapedia | Search</title>
+<link rel="stylesheet"
+	href="../resources/lib/bootstrap/css/bootstrap.min.css"
+	th:href="@{/resources/lib/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+	th:href="@{http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css}" />
+
+<link rel="stylesheet" href="../resources/css/header.css"
+	th:href="@{/resources/css/header.css}" />
+<link rel="stylesheet" href="../resources/css/footer.css"
+	th:href="@{/resources/css/footer.css}" />
+<link rel="stylesheet" href="../resources/css/search.css"
+	th:href="@{/resources/css/search.css}" />
+<link rel="stylesheet" href="../resources/css/home.css"
+	th:href="@{/resources/css/home.css}" />
+
+</head>
+
+<body>
+	<div id="custom-bootstrap-menu"
+		class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/" th:href="@{/}">Bangladesh</a>
+			</div>
+
+			<div class="navbar-collapse collapse" id="searchbar">
+				<form class="navbar-form" action="#" th:action="@{/doc/search}">
+					<div class="form-group" style="display: inline;">
+						<div class="input-group" style="display: table;">
+							<span class="input-group-addon" style="width: 6%;"> <span
+								class="glyphicon glyphicon-search"></span>
+							</span> <input class="form-control" name="q" placeholder="Search Here"
+								autocomplete="off" autofocus="autofocus" type="text"> </input>
+						</div>
+					</div>
+				</form>
+
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="container col-lg-12 main">
+				<div class="col-lg-12 post">
+					<div class="container">
+
+						<br></br> <br></br>
+
+						<div class="pinr">
+							<div id="circle-shape-example">
+								<h2 th:text="${doc.title}">জয়নুদ্দীন, শেখ</h2>
+
+								<p class='text-muted ubuntu'>
+									<a th:href="@{${doc.url}}">প্রবন্ধটি বাংলাপিডিয়ায় দেখুন</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
+										th:href="@{${doc.otherLangURL}}">Visit English translation in Banglapedia</a>
+								</p>
+								<hr style="margin: 8px; border-bottom: 1px solid #ccc;"></hr>
+								<img th:src="@{${doc.photoURL}}" src="http://bn.banglapedia.org/images/f/f4/Satmp.jpg"
+									alt="A photograph of sliced kiwifruit on a while plate"
+									class="curve"></img>
+
+								<article>
+									<p th:text="${doc.article}">ডাকটিকিট উপমহাদেশের প্রথম
+										ডাকটিকিট চালু করা হয় ১ অক্টোবর, ১৮৫৪। এক পয়সা মূল্যের
+										পোস্টকার্ড এবং আধা আনা মূল্যের খামে ভারতের যে কোন অংশে চিঠি
+										পাঠাবার ব্যবস্থা হয়। ব্রিটিশ ভারতে বিভিন্ন সময়ে ছাড়কৃত
+										ডাকটিকেটের সংখ্যা: ইষ্ট ইন্ডিয়া কোম্পানি (১৮৫৪-১৮৫৮) শাসনামলে
+										১৮টি, রানী ভিক্টোরিয়ার (১৮৫৮-১৮৮২) শাসনামলে ১৯টি, রাজা সপ্তম
+										এডওয়ার্ডের (১৮৮২-১৯১১) শাসনামলে ২৪টি, রাজা পঞ্চম জর্জের
+
+										নিয়ন্ত্রণ গ্রহণের পর পরিবহণ ও যোগাযোগ মন্ত্রণালয়ের অধীনে
+										ডাকবিভাগকে ন্যস্ত করে। ডাকটিকিট ডিজাইনার বিমান মল্লিক আটটি
+										ডাকটিকিটের ডিজাইন করেন এবং তা ১৯৭১ সনের জুনে মুজিবনগর সরকারের
+										কাছে পাঠান এবং সেগুলি বাংলাদেশ মুক্তিযুদ্ধের পক্ষে জনমত
+										সৃষ্টির জন্য বিশ্বের বিভিন্ন দেশে বিতরণের ব্যবস্থা নেওয়া হয়।
+
+										ডাকটিকিটগুলি লিথোগ্রাফি পদ্ধতিতে সাদা বর্ডার ঘেরা জলছাপবিহীন
+										নিরাপত্তা কাগজের প্রতিটিতে দৈর্ঘে ও প্রস্থে ১০×১০টি হিসেবে
+										অর্থাৎ মোট ১০০টি করে ছাপানো হয়েছিল। প্রতি ডাকটিকিটের দৈর্ঘে ও
+
+
+										বাস্তবসম্মত নয়। সে কারণে ব্যবহূত রাবার সিলসমূহের ডিজাইনে
+										যথেষ্ট পরিমাণে হেরফের ঘটেছে। তাছাড়া সিল-এ ব্যবহূত কালির রং ও
+										ভিন্ন ছিল। অধিকাংশ ক্ষেত্রে তা’ ছিল বেগুনি, তা’ছাড়া ডাক
+										কর্তৃপক্ষের সরবরাহ করা পোস্টমার্ক দেওয়ার কালির রং ছিল কালো।
+										অল্প কিছু স্থানে সবুজ ও লাল রংও ব্যবহার হয়েছে। রাবার সিলযুক্ত
+
+										উচ্চমূল্যে কেনা-বেচা হয়ে থাকে। [সিদ্দিক মাহমুদুর রহমান]</p>
+								</article>
+								<br></br>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<!--   footer      -->
+	<footer class="footer-distributed">
+		<div class="footer-left">
+
+			<p class="footer-links">
+				<a href="#">Home</a> · <a href="#">About</a> · <a href="#">Faq</a> ·
+				<a href="#">Contact</a>
+			</p>
+			<p class="footer-company-name">NEWS Hub © 2015</p>
+		</div>
+		<div class="footer-center">
+			<div>
+				<i class="fa fa-map-marker"></i>
+				<p>
+					<span>IICT, SUST</span> Sylhet
+				</p>
+			</div>
+			<div>
+				<i class="fa fa-phone"></i>
+				<p>+880 1717 364467</p>
+			</div>
+			<div>
+				<i class="fa fa-envelope"></i>
+				<p>
+					<a href="mailto:support@company.com">shafin.mahmud@gmail.com</a>
+				</p>
+			</div>
+		</div>
+
+		<div class="footer-right">
+			<p class="footer-company-about">
+				<span>About me</span> <i>Some days are just bad days, that's
+					all. You have to experience sadness to know happiness, and I remind
+					myself that not every day is going to be a good day, that's just
+					the way it is!</i> <b>Dita Von Teese</b>
+			</p>
+
+			<div class="footer-icons">
+				<a href="#"><i class="fa fa-facebook"></i></a> <a
+					href="https://fb.com/shafin.mahmud"><i class="fa fa-twitter"></i></a>
+				<a href="#twitter.com/twitting.mahmud"><i class="fa fa-linkedin"></i></a>
+				<a href="https://github.com/shafinmahmud"><i
+					class="fa fa-github"></i></a>
+			</div>
+		</div>
+	</footer>
+
+	<script
+		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='http://demosthenes.info/assets/scripts/extras/shapes.js'></script>
+</body>
+
+</html>

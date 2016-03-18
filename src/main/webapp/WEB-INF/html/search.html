@@ -75,9 +75,12 @@
 									src="http://bn.banglapedia.org/images/7/72/MedicinalHerbBasak.jpg" />
 								</a>
 								<div class="media-body">
-									<h3 class="media-heading" th:text="${doc.title}">
-										ঔষধি লতাগুল্ম <span class="badge" th:text="${doc.cosineValue}">0.52521</span>
-									</h3>
+									<div class="row-fluid">
+										<h3 style="display: inline;" class="media-heading"
+											th:text="${doc.title}">ঔষধি লতাগুল্ম</h3>
+										<span class="label label-danger" th:text="${doc.cosineValue}">0.0000</span>
+									</div>
+									<br></br>
 									<article>
 										<p th:text="${doc.article}">ঔষধি লতাগুল্ম (Medicinal Herb)
 											রোগ নিরাময়কারী হিসেবে ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত
@@ -91,11 +94,12 @@
 											রোগ নিরাময়কারী হিসেবে ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত
 											দ্রব্য।</p>
 									</article>
-									<em><a th:thref="@{${doc.url}}"
+									<em><a th:href="@{${doc.url}}"
 										href="http://bootsnipp.com/snippets/featured/sexy-sidebar-navigation"
 										target="_blank">প্রবন্ধটি বাংলাপিডিয়ায় দেখুন</a></em> <a
-										th:thref="@{/}" class="btn btn-blog pull-right marginBottom10"
-										href="http://bootsnipp.com/user/snippets/2RoQ">আরও পড়ুন</a>
+										th:href="@{/doc(name=${doc.fileName})}"
+										class="btn btn-blog pull-right marginBottom10">আরও
+										পড়ুন</a>
 								</div>
 							</div>
 
