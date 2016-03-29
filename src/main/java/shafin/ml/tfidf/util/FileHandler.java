@@ -32,6 +32,28 @@ public class FileHandler {
 		return fileNames;
 	}
 
+	public static List<String> getRecursiveFileList(String path) throws IOException {
+		final List<String> fileList = new ArrayList<>();
+
+		class FileRecursion {
+			private void listFilesForFolder(File folder) {
+				for (File fileEntry : folder.listFiles()) {
+					if (fileEntry.isDirectory()) {
+						listFilesForFolder(fileEntry);
+					} else {
+						fileList.add(fileEntry.getAbsolutePath());
+					}
+				}
+			}
+		}
+
+		File folder = new File(path);
+		FileRecursion recursion = new FileRecursion();
+		recursion.listFilesForFolder(folder);
+
+		return fileList;
+	}
+
 	public static List<String> readFile(String filePath) {
 
 		List<String> lines = new ArrayList<>();
@@ -58,6 +80,33 @@ public class FileHandler {
 			}
 		}
 		return lines;
+	}
+
+	public static String readFileAsSingleString(String filePath) {
+
+		StringBuilder sb = new StringBuilder();
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(new FileReader(filePath));
+
+			sb = new StringBuilder();
+			String s = null;
+			while ((s = in.readLine()) != null) {
+				sb.append(s);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				in.close();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return sb.toString();
+
 	}
 
 	public static boolean writeFile(String filePath, String textData) {
@@ -158,4 +207,5 @@ public class FileHandler {
 			throw e;
 		}
 	}
+
 }

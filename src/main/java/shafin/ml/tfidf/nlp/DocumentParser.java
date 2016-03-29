@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Set;
 
 import shafin.ml.tfidf.util.FileHandler;
+import shafin.ml.tfidf.util.PropertyUtil;
 
 public class DocumentParser {
 
+	private String DATA_PATH = PropertyUtil.getPropertyValue("DATA_PATH");
 	private Set<String> MALICIOUS_TOKEN;
 	
 	private Set<String> stopWords;
@@ -18,8 +20,8 @@ public class DocumentParser {
 	public DocumentParser(String text) {
 		
 		this.tokens = Tokenizer.getTokenizedBnList(text);
-		this.stopWords = new HashSet<>(FileHandler.readFile("D:\\DOCUMENT\\PROJECTS\\SPRING\\ml-tfidf\\stopwords.txt"));
-		this.MALICIOUS_TOKEN = new HashSet<>(FileHandler.readFile("D:\\DOCUMENT\\PROJECTS\\SPRING\\ml-tfidf\\maltoken.txt"));
+		this.stopWords = new HashSet<>(FileHandler.readFile(DATA_PATH+"stopwords.txt"));
+		this.MALICIOUS_TOKEN = new HashSet<>(FileHandler.readFile(DATA_PATH+"maltoken.txt"));
 	}
 
 	public List<String> getTokensExcludingStopwordsList() {
@@ -37,7 +39,7 @@ public class DocumentParser {
 	}
 
 	public static void main(String[] args) {
-		String text = "৪ ফেব্রুয়ারি, |  + বৃহস্পতিবার, দিবাগত রাত প্রায় সাড়ে ১২টায় বাংলাদেশ ব্যাংকের সুইফটের বার্তা বা সংকেত ব্যবহার করে "
+		String text = "৪ ফেব্রুয়ারি, |  + দু’জন  বৃহস্পতিবার,‘হামদর্দ  দিবাগত রাত প্রায় সাড়ে ১২টায় বাংলাদেশ ব্যাংকের সুইফটের বার্তা বা সংকেত ব্যবহার করে "
 				+ "৩৫টি অর্থ স্থানান্তরের পরামর্শ বা অ্যাডভাইস পাঠানো হয়েছিল যুক্তরাষ্ট্রের ফেডারেল রিজার্ভ ব্যাংক অব নিউইয়র্কে।";
 		System.out.println(text);
 		DocumentParser parser = new DocumentParser(text);

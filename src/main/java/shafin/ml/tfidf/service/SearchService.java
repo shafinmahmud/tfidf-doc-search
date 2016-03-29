@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Service;
 
 import shafin.ml.tfidf.model.ArticleDto;
@@ -14,13 +16,16 @@ import shafin.ml.tfidf.model.BanglapediaDoc;
 import shafin.ml.tfidf.nlp.CosineSimilarity;
 import shafin.ml.tfidf.nlp.DataFileProcessor;
 import shafin.ml.tfidf.nlp.QueryEvaluator;
+import shafin.ml.tfidf.util.FileHandler;
 import shafin.ml.tfidf.util.JsonProcessor;
 import shafin.ml.tfidf.util.NumFormatter;
+import shafin.ml.tfidf.util.PropertyUtil;
 
 @Service("searchService")
 public class SearchService {
 
-	private final String CORPUS_LOCATION = "D:\\home\\corpus\\";
+	private final String CORPUS_LOCATION = PropertyUtil.getPropertyValue("DATA_PATH") + "corpus/bp/";
+	private final String SIMILARITY_TABLE_LOCATION = PropertyUtil.getPropertyValue("DATA_PATH") + "similarity/";
 
 	public List<ArticleDto> searchCollection(String query) {
 
@@ -30,8 +35,8 @@ public class SearchService {
 			QueryEvaluator queryEvaluator;
 			queryEvaluator = new QueryEvaluator(query);
 
-			Map<String, Double> cosineVector = CosineSimilarity
-					.getCosineSimilarities(DataFileProcessor.getTfidfHashTable(), queryEvaluator);
+			Map<String, Double> cosineVector = CosineSimilarity.getCosineSimilarDocs(StaticReference.TF_IDF_TABLE,
+					queryEvaluator);
 
 			for (String docID : cosineVector.keySet()) {
 
@@ -48,6 +53,35 @@ public class SearchService {
 			}
 
 		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		return docDtos;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ArticleDto> getSimilarDoc(String docName) {
+		List<ArticleDto> docDtos = new ArrayList<>();
+
+		try {
+			String json = FileHandler.readFileAsSingleString(SIMILARITY_TABLE_LOCATION + docName.replace(".bin", ".json"));
+			JsonProcessor jsonProcessor = new JsonProcessor(json);
+			Map<String, Double> map = (Map<String, Double>) jsonProcessor.convertToModel(Map.class);
+
+			int i = 0;
+			for (String simFileName : map.keySet()) {
+				if (i != 0) {
+					BanglapediaDoc banglapediaDoc = pullDoc(simFileName.replace(".bin", ".json"));
+					ArticleDto articleDto = convertToDto(simFileName, map.get(simFileName), banglapediaDoc);
+					docDtos.add(articleDto);
+				}
+
+				i++;
+				if (i > 10) {
+					break;
+				}
+			}
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return docDtos;
@@ -96,6 +130,13 @@ public class SearchService {
 		long end = new Date().getTime();
 		long diff = end - init;
 		System.out.println("time taken: " + diff);
+	}
+
+	@PostConstruct
+	public void loadDataTable() throws ClassNotFoundException, IOException {
+		System.out.println(new Date() + ": Loading TF-IDF table");
+		StaticReference.TF_IDF_TABLE = DataFileProcessor.getTfidfHashTable();
+		System.out.println(new Date() + ": TF-IDF table loading ends");
 	}
 
 }

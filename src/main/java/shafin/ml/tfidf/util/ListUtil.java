@@ -12,4 +12,6 @@ public class ListUtil {
 		Collections.shuffle(copy);
 		return copy.subList(0, n);
 	}
+	
+	
 }

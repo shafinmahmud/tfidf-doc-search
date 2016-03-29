@@ -55,7 +55,11 @@ public class TfIdf {
 				
 			}
 		}
-		//System.out.println(termToCheck+":"+allDocs.size()+"/"+count);
 		return 1 + Math.log(allDocs.size() / count);
+	}
+	
+	
+	public static double calculateIdf(int totalDoc, int count){
+		return 1 + Math.log(totalDoc / count);
 	}
 }

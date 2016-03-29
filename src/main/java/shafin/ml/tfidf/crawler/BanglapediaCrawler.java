@@ -7,22 +7,18 @@ import java.util.List;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import shafin.ml.tfidf.model.BanglapediaDoc;
-import shafin.ml.tfidf.service.BanglapediaService;
 import shafin.ml.tfidf.util.FileHandler;
 import shafin.ml.tfidf.util.JsonProcessor;
 import shafin.ml.tfidf.util.JsoupParser;
+import shafin.ml.tfidf.util.PropertyUtil;
 
 public class BanglapediaCrawler {
 
-	@Autowired
-	BanglapediaService service;
-
 	private final List<String> LINKS_TO_CRAWL;
-	private final String URL_FILE_LOCATION = "url_bn.txt";
-	private final String FILE_STORE_LOCATION = "D:\\DOCUMENT\\BP\\";
+	private final String URL_FILE_LOCATION = PropertyUtil.getPropertyValue("DATA_PATH")+"url_bn.txt";
+	private final String FILE_STORE_LOCATION = PropertyUtil.getPropertyValue("DATA_PATH")+"crawl_data/";
 
 	private JsoupParser jsoupParser;
 

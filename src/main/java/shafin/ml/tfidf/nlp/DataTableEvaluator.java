@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 import shafin.ml.tfidf.util.FileHandler;
+import shafin.ml.tfidf.util.PropertyUtil;
 
 /**
  *
@@ -19,7 +20,7 @@ import shafin.ml.tfidf.util.FileHandler;
  */
 public class DataTableEvaluator {
 
-	private final String TOKEN_FILE = "D:\\home\\search\\tokens.txt";
+	private final String TOKEN_FILE = PropertyUtil.getPropertyValue("DATA_PATH")+"search/tokens.txt";
 	
 	public DataTableEvaluator() throws IOException {
 		DataTable dataHashTable = new DataTable();
@@ -69,25 +70,38 @@ public class DataTableEvaluator {
 
 		DataTable tfHashTable = DataFileProcessor.getTfHashTable();
 
-		Set<String> allTerms = tfHashTable.getAllTerms();
+		Map<String, Integer> allTerms = tfHashTable.getAllTerms();
 		Map<String, HashMap<String, Double>> docTFTable = tfHashTable.getDocTermVector();
 
 		File[] docTFtemps = DataFileProcessor.getTempDocList();
 		for (File f : docTFtemps) {
 
-			System.out.println("consolidating : " + f.getName());
+			System.out.println("merging TF table : " + f.getName());
+			
+			boolean termsDocFreqCalculated = false;
 			
 			HashMap<String, Double> docTF = DataFileProcessor.readTempDocTF(f.getName().replace(".bin", ""));
 			for (String term : docTF.keySet()) {
-				if (!allTerms.contains(term.toLowerCase())) {
+				
+				if (!allTerms.keySet().contains(term)) {
 					
 					FileHandler.appendFile(this.TOKEN_FILE, term+"\n");
-					allTerms.add(term.toLowerCase());
+					allTerms.put(term, 1);	
+					termsDocFreqCalculated = true;
+					
+				}else{
+					if(!termsDocFreqCalculated){
+						allTerms.put(term, allTerms.get(term)+1);
+						termsDocFreqCalculated = true;
+					}				
 				}
 			}
 			
 			docTFTable.put(f.getName(), docTF);
-		}		
+		}	
+		
+		
+		
 		 DataFileProcessor.setTfHashTable(tfHashTable);
 	}
 	
@@ -97,19 +111,24 @@ public class DataTableEvaluator {
 		DataTable tfHashTable = DataFileProcessor.getTfHashTable();
 		HashMap<String, Double> idfHashTable = DataFileProcessor.getIdfHashTable();
 
-		Set<String> allTerms = tfHashTable.getAllTerms();
+		Map<String, Integer> allTerms = tfHashTable.getAllTerms();
 		Map<String, HashMap<String, Double>> docTFTable = tfHashTable.getDocTermVector();
 
 		System.out.println("IDF cal : "+allTerms.size());
 		
+		int totalNumberOfDoc = docTFTable.size();
+		
 		int i = 0;
-		for (String termToCheck : allTerms) {
-			System.out.println(i++ +" : "+termToCheck);
+		for (String termToCheck : allTerms.keySet()) {
+			System.out.println(i++ +" : "+termToCheck +" <> "+allTerms.get(termToCheck));
 			
-			if(!idfHashTable.containsKey(termToCheck)){
+			Double val = TfIdf.calculateIdf(totalNumberOfDoc, allTerms.get(termToCheck));
+			idfHashTable.put(termToCheck, new Double(val));
+			
+			/*if(!idfHashTable.containsKey(termToCheck)){
 				double val = TfIdf.idfCalculator(docTFTable, termToCheck);
 				idfHashTable.put(termToCheck, new Double(val));
-			}
+			}*/
 			
 			if(i%100 == 0){
 				DataFileProcessor.setIdfHashTable(idfHashTable);

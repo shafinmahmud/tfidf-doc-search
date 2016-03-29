@@ -3,30 +3,28 @@ package shafin.ml.tfidf.nlp;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-public class DataTable implements Serializable {
+public class DataTable implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	private Set<String> allTerms;
+	private Map<String, Integer> allTerms;
 	private Map<String, HashMap<String, Double>> docTermVector;
 	private HashMap<String, Double> docLengthVector;
 
 	public DataTable() {
-		this.allTerms = new HashSet<String>();
+		this.allTerms = new HashMap<>();
 		this.docTermVector = new HashMap<String, HashMap<String, Double>>();
 		this.docLengthVector = new HashMap<>();
 	}
 
-	public Set<String> getAllTerms() {
+	public Map<String, Integer> getAllTerms() {
 		return allTerms;
 	}
 
-	public void setAllTerms(Set<String> allTerms) {
+	public void setAllTerms(Map<String, Integer> allTerms) {
 		this.allTerms = allTerms;
 	}
 
@@ -70,5 +68,7 @@ public class DataTable implements Serializable {
 
 		return "";
 	}
+	
+
 
 }

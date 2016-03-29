@@ -12,11 +12,12 @@ import shafin.ml.tfidf.model.BanglapediaDoc;
 import shafin.ml.tfidf.util.FileHandler;
 import shafin.ml.tfidf.util.JsonProcessor;
 import shafin.ml.tfidf.util.ListUtil;
+import shafin.ml.tfidf.util.PropertyUtil;
 
 @Service("homeService")
 public class HomeService {
 
-	private final String CORPUS_LOCATION = "D:\\home\\corpus\\";
+	private final String CORPUS_LOCATION = PropertyUtil.getPropertyValue("DATA_PATH")+"corpus/bp/";
 
 	public List<ArticleDto> getRandomArticle(int num) {
 		List<ArticleDto> randomArticles = new ArrayList<>();

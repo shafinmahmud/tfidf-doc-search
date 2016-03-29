@@ -1,4 +1,5 @@
 package shafin.ml.tfidf.nlp;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,12 +12,11 @@ public class QueryEvaluator {
 
 	private Set<String> tokenizedUniqueTerms;
 	private String[] tokenizedTerms;
-	
+
 	private HashMap<String, Double> queryTFVector;
 	private HashMap<String, Double> queryTFIDFVector;
-	
+
 	private double queryLength;
-	
 
 	public QueryEvaluator() {
 	}
@@ -37,32 +37,34 @@ public class QueryEvaluator {
 		// generate queryTFVector
 		this.queryTFVector = new HashMap<>();
 		Iterator<String> uniqueTermIterator = this.tokenizedUniqueTerms.iterator();
-		
+
 		while (uniqueTermIterator.hasNext()) {
 			String term = uniqueTermIterator.next();
 			double value = TfIdf.tfCalculator(this.tokenizedTerms, term);
 			this.queryTFVector.put(term, value);
 		}
-		
-		//generate queryTFIDFVector
+
+		// generate queryTFIDFVector
 		this.queryTFIDFVector = new HashMap<>();
 		HashMap<String, Double> idfHashTable = DataFileProcessor.getIdfHashTable();
 		List<String> terms = new ArrayList<String>(this.queryTFVector.keySet());
 
 		for (int j = 0; j < terms.size(); j++) {
 			String term = terms.get(j);
+
 			double tf = this.queryTFVector.get(term);
 			double idf = 0.0;
 			try {
 				idf = idfHashTable.get(term);
 			} catch (NullPointerException e) {
-				
+
 			}
-			
-			this.queryTFIDFVector.put(term, tf*idf);
+
+			this.queryTFIDFVector.put(term, tf * idf);
+
 		}
-		
-		//generate queryLength
+
+		// generate queryLength
 		this.queryLength = CosineSimilarity.calculateLength(this.queryTFIDFVector);
 	}
 
@@ -89,7 +91,6 @@ public class QueryEvaluator {
 	public void setQueryTFVector(HashMap<String, Double> queryTFVector) {
 		this.queryTFVector = queryTFVector;
 	}
-	
 
 	public HashMap<String, Double> getQueryTFIDFVector() {
 		return queryTFIDFVector;
@@ -98,7 +99,7 @@ public class QueryEvaluator {
 	public void setQueryTFIDFVector(HashMap<String, Double> queryTFIDFVector) {
 		this.queryTFIDFVector = queryTFIDFVector;
 	}
-	
+
 	public double getQueryLength() {
 		return queryLength;
 	}

@@ -1,0 +1,27 @@
+Required Environment
+---------------------
+1. Java (JDK 7 or Higher) 
+   -you can get it here : http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+2. Eclipse Neon (4.6)/ Spring Tool Suite (3.7.3) / Netbeans or Any other compatible IDE
+3. Its assuming that you have properly configured and working Maven build tool and Tomcat( or any other JDK 	   server).
+4. And obviously a descent internet connection.
+
+Follow the Steps:
+-----------------
+1. Import your project to your IDE
+2. From package explorer find the "path.properties" in "src/main/resources" folder
+3. In path.properties file change the "PROJECT_PATH" value as your project root directory
+4. Now Build the project
+5. Run on server
+
+How to:
+-------
+
+1. How to Banglapedia?
+   - run the Controller.java located in "shafin.ml.tfidf.crawler". This will save the the data in "\data\crawl_data
+
+2. How to generate the TFIDF data table?
+   - run the Main.java in located in "shafin.ml.tfidf.nlp".
+
+3. How generate Article Similarity matrix?
+   - run the ArticleSimilarity.java in located in "shafin.ml.tfidf.nlp".

@@ -10,8 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 
-/*
- */
+import shafin.ml.tfidf.util.PropertyUtil;
 
 /**
  *
@@ -19,10 +18,10 @@ import java.util.HashMap;
  */
 public class DataFileProcessor {
 
-	private final static String TEMP_FOLDER = "D:\\home\\search\\bin";
-	private final static String TF_FILE_PATH = "D:\\home\\search\\tf.bin";
-	private final static String IDF_FILE_PATH = "D:\\home\\search\\idf.bin";
-	private final static String TFIDF_FILE_PATH = "D:\\home\\search\\tfidf.bin";
+	private final static String TEMP_FOLDER = PropertyUtil.getPropertyValue("DATA_PATH")+"search/temp/";
+	private final static String TF_FILE_PATH =  PropertyUtil.getPropertyValue("DATA_PATH")+"search/tf.bin";
+	private final static String IDF_FILE_PATH =  PropertyUtil.getPropertyValue("DATA_PATH")+"search/idf.bin";
+	private final static String TFIDF_FILE_PATH =  PropertyUtil.getPropertyValue("DATA_PATH")+"search/tfidf.bin";
 
 	private static DataTable tfHashTable;
 	private static HashMap<String,Double> idfHashTable;
@@ -43,10 +42,10 @@ public class DataFileProcessor {
 	}
 	
 	public static void createTempDocTF(HashMap<String, Double> vector, String docID) throws IOException{
-		File dataFile = new File(TEMP_FOLDER+"\\"+docID+".bin");
+		File dataFile = new File(TEMP_FOLDER+"/"+docID+".bin");
 		dataFile.createNewFile();
 		
-		OutputStream output = new FileOutputStream(TEMP_FOLDER+"\\"+docID+".bin");
+		OutputStream output = new FileOutputStream(TEMP_FOLDER+"/"+docID+".bin");
 
 		try (ObjectOutputStream oos = new ObjectOutputStream(output);) {
 			oos.writeObject(vector);
@@ -60,7 +59,7 @@ public class DataFileProcessor {
 	
 	@SuppressWarnings("unchecked")
 	public static HashMap<String, Double> readTempDocTF(String docID) throws IOException, ClassNotFoundException{
-		InputStream input = new FileInputStream(TEMP_FOLDER+"\\"+docID+".bin");
+		InputStream input = new FileInputStream(TEMP_FOLDER+"/"+docID+".bin");
 		
 		HashMap<String, Double> tempDocTF;
 		try (ObjectInputStream ois = new ObjectInputStream(input)) {

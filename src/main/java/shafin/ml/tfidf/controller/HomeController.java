@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import shafin.ml.tfidf.model.ArticleDto;
 import shafin.ml.tfidf.model.BanglapediaDoc;
 import shafin.ml.tfidf.service.HomeService;
+import shafin.ml.tfidf.service.SearchService;
 
 
 @Controller
@@ -22,6 +23,9 @@ public class HomeController {
 
 	@Autowired
 	HomeService homeService;
+	
+	@Autowired
+	SearchService searchService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -35,8 +39,12 @@ public class HomeController {
 	@RequestMapping(value = "/doc", params = { "name" }, method = RequestMethod.GET)
 	public String getDoc(HttpServletRequest request, @RequestParam("name") String name, Model model) {
 			
-		BanglapediaDoc doc = homeService.pullDoc(name);
+		BanglapediaDoc doc = homeService.pullDoc(name.replace(".bin", ".json"));
+		
+		ArrayList<ArticleDto>  simDocs = (ArrayList<ArticleDto>)searchService.getSimilarDoc(name);
+		
 		model.addAttribute("doc",doc);
+		model.addAttribute("simDocs", simDocs);
 		
 		return "article";
 	}

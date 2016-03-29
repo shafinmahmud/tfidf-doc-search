@@ -6,14 +6,6 @@ import java.util.WeakHashMap;
 
 import shafin.ml.tfidf.util.FileHandler;
 
-/**
- * Bengali light stemmer- removes number, gender and case suffixes from nouns
- * and adjectives Done by Ljiljana Dolamic (University of Neuchatel,
- * www.unine.ch/info/clef/)
- * 
- * @author Ljiljana Dolamic. Email: ljiljana.dolamic@unine.ch
- * 
- */
 public class BengaliStemmerLight {
 
 	/**

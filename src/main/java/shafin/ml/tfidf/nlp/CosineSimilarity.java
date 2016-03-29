@@ -16,13 +16,13 @@ public class CosineSimilarity {
 	public static HashMap<String, Double> queryTFIDFVector;
 	public static Double queryLength;
 
-	public static Map<String, Double> getCosineSimilarities(DataTable tfidfDataTable, QueryEvaluator queryData) {
+	public static Map<String, Double> getCosineSimilarDocs(DataTable tfidfDataTable, QueryEvaluator queryData) {
 
 		/* initializing the static fields */
 		cosineSimilarities = new HashMap<>();
 		docLengthVector = new HashMap<>();
 		queryTFIDFVector = new HashMap<>();
-		
+
 		Map<String, HashMap<String, Double>> docTermVectors = tfidfDataTable.getDocTermVector();
 		queryTFIDFVector = queryData.getQueryTFIDFVector();
 
@@ -49,6 +49,7 @@ public class CosineSimilarity {
 		}
 		return null;
 	}
+
 
 	public static double calculateLength(HashMap<String, Double> tfidfVector) {
 

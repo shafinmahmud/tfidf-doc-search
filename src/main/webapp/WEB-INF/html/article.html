@@ -67,10 +67,12 @@
 
 								<p class='text-muted ubuntu'>
 									<a th:href="@{${doc.url}}">প্রবন্ধটি বাংলাপিডিয়ায় দেখুন</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a
-										th:href="@{${doc.otherLangURL}}">Visit English translation in Banglapedia</a>
+										th:href="@{${doc.otherLangURL}}">Visit English translation
+										in Banglapedia</a>
 								</p>
 								<hr style="margin: 8px; border-bottom: 1px solid #ccc;"></hr>
-								<img th:src="@{${doc.photoURL}}" src="http://bn.banglapedia.org/images/f/f4/Satmp.jpg"
+								<img th:src="@{${doc.photoURL}}"
+									src="http://bn.banglapedia.org/images/f/f4/Satmp.jpg"
 									alt="A photograph of sliced kiwifruit on a while plate"
 									class="curve"></img>
 
@@ -103,6 +105,27 @@
 										উচ্চমূল্যে কেনা-বেচা হয়ে থাকে। [সিদ্দিক মাহমুদুর রহমান]</p>
 								</article>
 								<br></br>
+							</div>
+						</div>
+
+						<h2>অনুরূপ প্রবন্ধ</h2>
+						<div id="columns">
+
+							<div th:each="simDoc, rowStat: *{simDocs}">
+								<div class="pin">
+									<img th:src="@{${simDoc.photoURL}}"
+										src="http://bn.banglapedia.org/images/7/72/MedicinalHerbBasak.jpg" />
+									<a style="font-size: 20px" th:text="${simDoc.title}"
+										th:href="@{/doc(name=${simDoc.fileName})}"> ঔষধি লতাগুল্ম </a> <span
+										class="label label-danger" th:text="${simDoc.cosineValue}">0.0000</span>
+									<span></span>
+									<p th:text="${simDoc.article}">ঔষধি লতাগুল্ম (Medicinal Herb)
+										রোগ নিরাময়কারী হিসেবে ব্যবহার্য উদ্ভিদ অথবা উদ্ভিদজাত দ্রব্য।
+										ঔষধি লতাগুল্মের এমন বিশেষ কিছু গুণ রয়েছে যা চিকিৎসার
+										গুরুত্বপূর্ণ উপাদান হিসেবে কাজ করে। এর মধ্যে উল্লেখযোগ্য
+										কতিপয় অ্যালকালয়েড (alkaloid)...</p>
+
+								</div>
 							</div>
 						</div>
 
